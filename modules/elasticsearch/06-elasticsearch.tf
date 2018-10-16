@@ -26,23 +26,6 @@ resource "aws_elasticsearch_domain" "default" {
     kms_key_id = "${var.encrypt_at_rest_kms_key_id}"
   }
 
-  access_policies = <<CONFIG
-{
-    "Version": "2012-10-17",
-    "Statement": [
-        {
-            "Action": "es:*",
-            "Principal": "*",
-            "Effect": "Allow",
-            "Resource": "arn:aws:es:${var.region}:${data.aws_caller_identity.current.account_id}:domain/${var.name}/*",
-            "Condition": {
-                "IpAddress": {"aws:SourceIp": ["1.214.48.241/32"]}
-            }
-        }
-    ]
-}
-CONFIG
-
   # vpc_options {
   #   // You must specify exactly one subnet.
   #   subnet_ids = ["${element(aws_subnet.es.*.id, 0)}"]

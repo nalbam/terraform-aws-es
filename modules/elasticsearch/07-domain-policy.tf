@@ -20,6 +20,29 @@ data "aws_iam_policy_document" "default" {
       identifiers = ["${data.aws_iam_user.default.arn}"]
     }
   }
+
+  statement {
+    actions = ["es:*"]
+
+    resources = [
+      "${join("", aws_elasticsearch_domain.default.*.arn)}",
+      "${join("", aws_elasticsearch_domain.default.*.arn)}/*",
+    ]
+
+    principals {
+      type        = "AWS"
+      identifiers = ["*"]
+    }
+
+    condition {
+      test     = "IpAddress"
+      variable = "aws:SourceIp"
+
+      values = [
+        "1.214.48.241/32",
+      ]
+    }
+  }
 }
 
 resource "aws_elasticsearch_domain_policy" "default" {

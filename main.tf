@@ -31,7 +31,7 @@ module "elasticsearch" {
 
   vpc_enabled = "false"
 
-  domain_policy_enabled = "false"
+  domain_policy_enabled = "true"
 
   advanced_options {
     "rest.action.multi.allow_explicit_index" = "true"
