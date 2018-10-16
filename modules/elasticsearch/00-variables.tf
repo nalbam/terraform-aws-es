@@ -53,7 +53,7 @@ variable "iam_role_arns" {
 variable "iam_actions" {
   description = "List of actions to allow for the IAM roles, _e.g._ `es:ESHttpGet`, `es:ESHttpPut`, `es:ESHttpPost`"
   type        = "list"
-  default     = []
+  default     = ["es:ESHttpGet", "es:ESHttpPut", "es:ESHttpPost"]
 }
 
 variable "zone_awareness_enabled" {
