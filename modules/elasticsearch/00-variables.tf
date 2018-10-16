@@ -44,8 +44,13 @@ variable "instance_count" {
   default     = 1
 }
 
+variable "vpc_enabled" {
+  description = "Enable vpc for Elasticsearch cluster"
+  type        = "string"
+  default     = "true"
+}
+
 variable "domain_policy_enabled" {
-  // You must select an even number of data nodes if zone awareness is enabled.
   description = "Enable domain policy for Elasticsearch cluster"
   type        = "string"
   default     = "true"
@@ -156,5 +161,9 @@ variable "dedicated_master_type" {
   type        = "string"
   default     = "t2.small.elasticsearch"
 }
+
+data "aws_region" "current" {}
+
+data "aws_caller_identity" "current" {}
 
 data "aws_availability_zones" "azs" {}

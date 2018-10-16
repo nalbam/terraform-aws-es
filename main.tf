@@ -29,7 +29,9 @@ module "elasticsearch" {
   zone_awareness_enabled  = "false"
   encrypt_at_rest_enabled = "false"
 
-  domain_policy_enabled = "true"
+  vpc_enabled = "false"
+
+  domain_policy_enabled = "false"
 
   advanced_options {
     "rest.action.multi.allow_explicit_index" = "true"
@@ -40,6 +42,6 @@ output "domain" {
   value = "${module.elasticsearch.domain}"
 }
 
-output "kibana" {
-  value = "${module.elasticsearch.kibana}"
-}
+# output "kibana" {
+#   value = "${module.elasticsearch.kibana}"
+# }

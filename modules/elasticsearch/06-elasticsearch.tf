@@ -1,8 +1,18 @@
 resource "aws_elasticsearch_domain" "default" {
-  domain_name           = "${var.name}"
+  domain_name = "${var.name}"
+
   elasticsearch_version = "${var.elasticsearch_version}"
 
   advanced_options = "${var.advanced_options}"
+
+  cluster_config {
+    instance_count           = "${var.instance_count}"
+    instance_type            = "${var.instance_type}"
+    dedicated_master_enabled = "${var.dedicated_master_enabled}"
+    dedicated_master_count   = "${var.dedicated_master_count}"
+    dedicated_master_type    = "${var.dedicated_master_type}"
+    zone_awareness_enabled   = "${var.zone_awareness_enabled}"
+  }
 
   ebs_options {
     ebs_enabled = "${var.ebs_volume_size > 0 ? true : false}"
@@ -16,44 +26,52 @@ resource "aws_elasticsearch_domain" "default" {
     kms_key_id = "${var.encrypt_at_rest_kms_key_id}"
   }
 
-  cluster_config {
-    instance_count           = "${var.instance_count}"
-    instance_type            = "${var.instance_type}"
-    dedicated_master_enabled = "${var.dedicated_master_enabled}"
-    dedicated_master_count   = "${var.dedicated_master_count}"
-    dedicated_master_type    = "${var.dedicated_master_type}"
-    zone_awareness_enabled   = "${var.zone_awareness_enabled}"
-  }
-
-  vpc_options {
-    // You must specify exactly one subnet.
-    subnet_ids = ["${element(aws_subnet.es.*.id, 0)}"]
-
-    security_group_ids = [
-      "${aws_security_group.vpc.id}",
-      "${aws_security_group.ingress.id}",
-      "${aws_security_group.egress.id}",
+  access_policies = <<CONFIG
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Action": "es:*",
+            "Principal": "*",
+            "Effect": "Allow",
+            "Resource": "arn:aws:es:${var.region}:${data.aws_caller_identity.current.account_id}:domain/${var.name}/*",
+            "Condition": {
+                "IpAddress": {"aws:SourceIp": ["1.214.48.241/32"]}
+            }
+        }
     ]
-  }
+}
+CONFIG
+
+  # vpc_options {
+  #   // You must specify exactly one subnet.
+  #   subnet_ids = ["${element(aws_subnet.es.*.id, 0)}"]
+
+  #   security_group_ids = [
+  #     "${aws_security_group.vpc.id}",
+  #     "${aws_security_group.ingress.id}",
+  #     "${aws_security_group.egress.id}",
+  #   ]
+  # }
 
   snapshot_options {
     automated_snapshot_start_hour = "${var.automated_snapshot_start_hour}"
   }
 
   log_publishing_options {
-    enabled                  = "${var.log_publishing_index_enabled }"
+    enabled                  = "${var.log_publishing_index_enabled}"
     log_type                 = "INDEX_SLOW_LOGS"
     cloudwatch_log_group_arn = "${var.log_publishing_index_cloudwatch_log_group_arn}"
   }
 
   log_publishing_options {
-    enabled                  = "${var.log_publishing_search_enabled }"
+    enabled                  = "${var.log_publishing_search_enabled}"
     log_type                 = "SEARCH_SLOW_LOGS"
     cloudwatch_log_group_arn = "${var.log_publishing_search_cloudwatch_log_group_arn}"
   }
 
   log_publishing_options {
-    enabled                  = "${var.log_publishing_application_enabled }"
+    enabled                  = "${var.log_publishing_application_enabled}"
     log_type                 = "ES_APPLICATION_LOGS"
     cloudwatch_log_group_arn = "${var.log_publishing_application_cloudwatch_log_group_arn}"
   }
