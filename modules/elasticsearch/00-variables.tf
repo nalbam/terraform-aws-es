@@ -44,12 +44,6 @@ variable "instance_count" {
   default     = 1
 }
 
-variable "vpc_enabled" {
-  description = "Enable vpc for Elasticsearch cluster"
-  type        = "string"
-  default     = "true"
-}
-
 variable "domain_policy_enabled" {
   description = "Enable domain policy for Elasticsearch cluster"
   type        = "string"

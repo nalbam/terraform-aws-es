@@ -29,8 +29,6 @@ module "elasticsearch" {
   zone_awareness_enabled  = "false"
   encrypt_at_rest_enabled = "false"
 
-  vpc_enabled = "false"
-
   domain_policy_enabled = "true"
 
   advanced_options {
