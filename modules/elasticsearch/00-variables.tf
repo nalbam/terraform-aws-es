@@ -44,6 +44,13 @@ variable "instance_count" {
   default     = 1
 }
 
+variable "domain_policy_enabled" {
+  // You must select an even number of data nodes if zone awareness is enabled.
+  description = "Enable domain policy for Elasticsearch cluster"
+  type        = "string"
+  default     = "true"
+}
+
 variable "iam_role_arns" {
   description = "List of IAM role ARNs to permit access to the Elasticsearch domain"
   type        = "list"

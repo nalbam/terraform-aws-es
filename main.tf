@@ -29,7 +29,7 @@ module "elasticsearch" {
   zone_awareness_enabled  = "false"
   encrypt_at_rest_enabled = "false"
 
-  domain_policy = "false"
+  domain_policy_enabled = "true"
 
   advanced_options {
     "rest.action.multi.allow_explicit_index" = "true"
