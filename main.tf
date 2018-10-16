@@ -13,6 +13,10 @@ terraform {
   required_version = "> 0.11.0"
 }
 
+data "aws_iam_user" "dev" {
+  user_name = "dev"
+}
+
 module "elasticsearch" {
   source      = "./modules/elasticsearch"
   region      = "${var.region}"
@@ -29,7 +33,7 @@ module "elasticsearch" {
   zone_awareness_enabled  = "false"
   encrypt_at_rest_enabled = "false"
 
-  iam_role_arns = ["arn:aws:iam::xxxxxxxxxx:user/dev"]
+  iam_role_arns = ["${data.aws_iam_user.dev.arn}"]
   iam_actions   = ["es:ESHttpGet", "es:ESHttpPut", "es:ESHttpPost"]
 
   advanced_options {
