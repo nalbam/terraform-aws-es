@@ -2,7 +2,7 @@ data "aws_iam_policy_document" "default" {
   count = "${var.domain_policy_enabled == "true" ? 1 : 0}"
 
   statement {
-    actions = ["${distinct(compact(var.iam_actions))}"]
+    actions = ["${var.iam_actions}"]
 
     resources = [
       "${join("", aws_elasticsearch_domain.default.*.arn)}",
@@ -11,13 +11,13 @@ data "aws_iam_policy_document" "default" {
 
     principals {
       type        = "AWS"
-      identifiers = ["${data.aws_iam_user.default.arn}"]
+      identifiers = ["${var.iam_role_arns}"]
     }
 
     condition {
       test     = "IpAddress"
       variable = "aws:SourceIp"
-      values   = ["${distinct(compact(var.allow_ip_address))}"]
+      values   = ["${var.allow_ip_address}"]
     }
   }
 }
