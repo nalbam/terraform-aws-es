@@ -35,6 +35,9 @@ module "elasticsearch" {
   encrypt_at_rest_enabled = "false"
 
   domain_policy_enabled = "true"
+  allow_ip_address = [
+    "1.214.48.241/32",
+  ]
 
   advanced_options {
     "rest.action.multi.allow_explicit_index" = "true"

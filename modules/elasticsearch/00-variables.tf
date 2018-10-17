@@ -62,16 +62,22 @@ variable "domain_policy_enabled" {
   default     = "true"
 }
 
-variable "iam_role_arns" {
-  description = "List of IAM role ARNs to permit access to the Elasticsearch domain"
-  type        = "list"
-  default     = []
-}
-
 variable "iam_actions" {
   description = "List of actions to allow for the IAM roles, _e.g._ `es:ESHttpGet`, `es:ESHttpPut`, `es:ESHttpPost`"
   type        = "list"
   default     = ["es:ESHttpGet", "es:ESHttpPut", "es:ESHttpPost"]
+}
+
+variable "iam_role_arns" {
+  description = "List of IAM role ARNs to permit access to the Elasticsearch domain"
+  type        = "list"
+  default     = ["*"]
+}
+
+variable "allow_ip_address" {
+  description = "List of IP Address to permit access to the Elasticsearch domain"
+  type        = "list"
+  default     = ["*"]
 }
 
 variable "zone_awareness_enabled" {
