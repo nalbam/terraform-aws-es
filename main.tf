@@ -44,6 +44,14 @@ module "elasticsearch" {
   }
 }
 
+output "name" {
+  value = "${module.elasticsearch.name}"
+}
+
+output "endpoint" {
+  value = "${module.elasticsearch.endpoint}"
+}
+
 output "domain" {
   value = "${module.elasticsearch.domain}"
 }

@@ -6,7 +6,7 @@ data "aws_route53_zone" "default" {
 resource "aws_route53_record" "default" {
   count   = "${var.base_domain != "" ? 1 : 0}"
   zone_id = "${data.aws_route53_zone.default.zone_id}"
-  name    = "${var.name}-${var.suffix}.${data.aws_route53_zone.default.name}"
+  name    = "${var.stage}-${var.name}-${var.suffix}.${data.aws_route53_zone.default.name}"
   type    = "CNAME"
   ttl     = 300
   records = [
