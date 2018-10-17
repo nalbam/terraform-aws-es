@@ -1,9 +1,21 @@
-variable "region" {
+variable region {
   default = "ap-northeast-2"
 }
 
-variable "name" {
-  default = "demo"
+variable city {
+  default = "SEOUL"
+}
+
+variable stage {
+  default = "DEV"
+}
+
+variable name {
+  default = "SRE"
+}
+
+variable suffix {
+  default = "ELASTICSEARCH"
 }
 
 variable "type" {

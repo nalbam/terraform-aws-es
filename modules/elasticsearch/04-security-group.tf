@@ -1,7 +1,7 @@
 resource "aws_security_group" "vpc" {
-  name        = "${var.name}-es-vpc"
+  name        = "${var.city}-${var.stage}-${var.name}-VPC"
   description = "Default security group that allows all instances in the VPC."
-  vpc_id      = "${data.aws_vpc.es.id}"
+  vpc_id      = "${data.aws_vpc.default.id}"
 
   ingress {
     from_port = "0"
@@ -18,14 +18,14 @@ resource "aws_security_group" "vpc" {
   }
 
   tags = {
-    Name = "${var.name}-es-vpc"
+    Name = "${var.city}-${var.stage}-${var.name}-VPC"
   }
 }
 
 resource "aws_security_group" "egress" {
-  name        = "${var.name}-es-egress"
+  name        = "${var.city}-${var.stage}-${var.name}-EGRESS"
   description = "Security group that allows egress."
-  vpc_id      = "${data.aws_vpc.es.id}"
+  vpc_id      = "${data.aws_vpc.default.id}"
 
   // ALL
   egress {
@@ -36,16 +36,16 @@ resource "aws_security_group" "egress" {
   }
 
   tags = {
-    Name = "${var.name}-es-egress"
+    Name = "${var.city}-${var.stage}-${var.name}-EGRESS"
   }
 }
 
 resource "aws_security_group" "ingress" {
-  name        = "${var.name}-es-ingress"
+  name        = "${var.city}-${var.stage}-${var.name}-INGRESS"
   description = "Security group that allows ingress."
-  vpc_id      = "${data.aws_vpc.es.id}"
+  vpc_id      = "${data.aws_vpc.default.id}"
 
-  // ALL
+  // SSH
   ingress {
     from_port   = "0"
     to_port     = "0"
@@ -54,6 +54,6 @@ resource "aws_security_group" "ingress" {
   }
 
   tags = {
-    Name = "${var.name}-es-ingress"
+    Name = "${var.city}-${var.stage}-${var.name}-INGRESS"
   }
 }

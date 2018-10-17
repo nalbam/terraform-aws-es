@@ -16,9 +16,14 @@ terraform {
 module "elasticsearch" {
   source      = "./modules/elasticsearch"
   region      = "${var.region}"
+  city        = "${var.city}"
+  stage       = "${var.stage}"
   name        = "${var.name}"
+  suffix      = "${var.suffix}"
+
   vpc_id      = "${var.vpc_id}"
   vpc_cidr    = "${var.vpc_cidr}"
+
   base_domain = "${var.base_domain}"
 
   instance_type  = "t2.small.elasticsearch"
@@ -39,7 +44,3 @@ module "elasticsearch" {
 output "domain" {
   value = "${module.elasticsearch.domain}"
 }
-
-# output "kibana" {
-#   value = "${module.elasticsearch.kibana}"
-# }

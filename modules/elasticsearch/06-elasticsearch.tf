@@ -1,5 +1,5 @@
 resource "aws_elasticsearch_domain" "default" {
-  domain_name = "${var.name}"
+  domain_name = "${lower(var.city)}-${lower(var.stage)}-${lower(var.name)}"
 
   elasticsearch_version = "${var.elasticsearch_version}"
 
@@ -28,7 +28,7 @@ resource "aws_elasticsearch_domain" "default" {
 
   # vpc_options {
   #   // You must specify exactly one subnet.
-  #   subnet_ids = ["${element(aws_subnet.es.*.id, 0)}"]
+  #   subnet_ids = ["${element(aws_subnet.default.*.id, 0)}"]
 
   #   security_group_ids = [
   #     "${aws_security_group.vpc.id}",
@@ -60,7 +60,8 @@ resource "aws_elasticsearch_domain" "default" {
   }
 
   tags = {
-    Name = "${var.name}-es"
+    # Name = "${var.city}-${upper(element(split("", data.aws_availability_zones.azs.names[0]), length(data.aws_availability_zones.azs.names[0])-1))}-${var.stage}-${var.name}-${var.suffix}"
+    Name = "${var.city}-${var.stage}-${var.name}-${var.suffix}"
   }
 
   depends_on = ["aws_iam_service_linked_role.default"]
