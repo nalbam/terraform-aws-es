@@ -60,9 +60,8 @@ resource "aws_elasticsearch_domain" "default" {
   }
 
   tags = {
-    # Name = "${var.city}-${upper(element(split("", data.aws_availability_zones.azs.names[0]), length(data.aws_availability_zones.azs.names[0])-1))}-${var.stage}-${var.name}-${var.suffix}"
     Name = "${var.city}-${var.stage}-${var.name}-${var.suffix}"
   }
 
-  depends_on = ["aws_iam_service_linked_role.default"]
+  # depends_on = ["aws_iam_service_linked_role.default"]
 }
