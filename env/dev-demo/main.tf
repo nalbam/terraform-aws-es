@@ -6,8 +6,6 @@ terraform {
     bucket = "terraform-nalbam-seoul"
     key    = "elasticsearch.tfstate"
   }
-
-  required_version = "> 0.11.0"
 }
 
 provider "aws" {
@@ -15,12 +13,13 @@ provider "aws" {
 }
 
 module "elasticsearch" {
-  source      = "../../modules/elasticsearch"
-  region      = "ap-northeast-2"
-  city        = "SEOUL"
-  stage       = "DEV"
-  name        = "DEMO"
-  suffix      = "ELASTICSEARCH"
+  source = "../../modules/elasticsearch"
+
+  region = "ap-northeast-2"
+  city   = "SEOUL"
+  stage  = "DEV"
+  name   = "DEMO"
+  suffix = "ELASTICSEARCH"
 
   base_domain = "nalbam.com"
 
