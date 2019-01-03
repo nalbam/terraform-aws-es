@@ -1,5 +1,5 @@
 resource "aws_elasticsearch_domain" "default" {
-  domain_name = "${lower(local.simple_name)}"
+  domain_name = "${lower(local.name)}"
 
   elasticsearch_version = "${var.elasticsearch_version}"
 
