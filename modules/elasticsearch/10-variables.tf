@@ -28,8 +28,12 @@ variable "vpc_cidr" {
   default = "10.0.0.0/16"
 }
 
+variable "subnets" {
+  default = "85"
+}
+
 variable "base_domain" {
-  description = "Base domain of the elasticsearch, e.g: nalbam.com"
+  description = "Base domain of the elasticsearch, e.g: opsnow.com"
   default = ""
 }
 
@@ -45,15 +49,15 @@ variable "elasticsearch_version" {
   default     = "6.3"
 }
 
-variable "instance_type" {
-  description = "Elasticsearch instance type for data nodes in the cluster"
-  type        = "string"
-  default     = "t2.small.elasticsearch"
-}
-
 variable "instance_count" {
   description = "Number of data nodes in the cluster"
   default     = 1
+}
+
+variable "instance_type" {
+  description = "Elasticsearch instance type for data nodes in the cluster"
+  type        = "string"
+  default     = "m4.large.elasticsearch"
 }
 
 variable "domain_policy_enabled" {
@@ -65,7 +69,7 @@ variable "domain_policy_enabled" {
 variable "iam_actions" {
   description = "List of actions to allow for the IAM roles, _e.g._ `es:ESHttpGet`, `es:ESHttpPut`, `es:ESHttpPost`"
   type        = "list"
-  default     = ["es:ESHttpGet", "es:ESHttpPut", "es:ESHttpPost"]
+  default     = ["es:*"]
 }
 
 variable "iam_role_arns" {
@@ -171,11 +175,5 @@ variable "dedicated_master_count" {
 variable "dedicated_master_type" {
   description = "Instance type of the dedicated master nodes in the cluster"
   type        = "string"
-  default     = "t2.small.elasticsearch"
+  default     = "m4.large.elasticsearch"
 }
-
-data "aws_region" "current" {}
-
-data "aws_caller_identity" "current" {}
-
-data "aws_availability_zones" "azs" {}

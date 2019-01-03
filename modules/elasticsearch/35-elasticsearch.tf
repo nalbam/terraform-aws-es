@@ -1,5 +1,5 @@
 resource "aws_elasticsearch_domain" "default" {
-  domain_name = "${lower(var.city)}-${lower(var.stage)}-${lower(var.name)}"
+  domain_name = "${lower(local.simple_name)}"
 
   elasticsearch_version = "${var.elasticsearch_version}"
 
@@ -60,7 +60,7 @@ resource "aws_elasticsearch_domain" "default" {
   }
 
   tags = {
-    Name = "${var.city}-${var.stage}-${var.name}-${var.suffix}"
+    Name = "${local.full_name}"
   }
 
   # depends_on = ["aws_iam_service_linked_role.default"]

@@ -5,9 +5,9 @@ output "name" {
 }
 
 output "endpoint" {
-  value = "${aws_elasticsearch_domain.default.*.endpoint}"
+  value = "${element(concat(aws_elasticsearch_domain.default.*.endpoint, list("")), 0)}"
 }
 
 output "domain" {
-  value = "${aws_route53_record.default.*.name}"
+  value = "${element(concat(aws_route53_record.default.*.name, list("")), 0)}"
 }

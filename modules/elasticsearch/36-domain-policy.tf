@@ -25,7 +25,7 @@ data "aws_iam_policy_document" "default" {
 resource "aws_elasticsearch_domain_policy" "default" {
   count = "${var.domain_policy_enabled == "true" ? 1 : 0}"
 
-  domain_name = "${lower(var.city)}-${lower(var.stage)}-${lower(var.name)}"
+  domain_name = "${lower(local.simple_name)}"
 
   access_policies = "${join("", data.aws_iam_policy_document.default.*.json)}"
 }

@@ -1,33 +1,35 @@
-# elasticsearch
-
-provider "aws" {
-  region = "${var.region}"
-}
+# bastion
 
 terraform {
   backend "s3" {
     region = "ap-northeast-2"
     bucket = "terraform-nalbam-seoul"
-    key = "elasticsearch.tfstate"
+    key    = "elasticsearch.tfstate"
   }
+
   required_version = "> 0.11.0"
 }
 
+provider "aws" {
+  region = "ap-northeast-2"
+}
+
 module "elasticsearch" {
-  source      = "./modules/elasticsearch"
-  region      = "${var.region}"
-  city        = "${var.city}"
-  stage       = "${var.stage}"
-  name        = "${var.name}"
-  suffix      = "${var.suffix}"
+  source      = "../../modules/elasticsearch"
+  region      = "ap-northeast-2"
+  city        = "SEOUL"
+  stage       = "DEV"
+  name        = "DEMO"
+  suffix      = "ELASTICSEARCH"
 
-  vpc_id      = "${var.vpc_id}"
-  vpc_cidr    = "${var.vpc_cidr}"
+  base_domain = "nalbam.com"
 
-  base_domain = "${var.base_domain}"
-
-  instance_type  = "t2.small.elasticsearch"
   instance_count = 1
+  instance_type  = "t2.small.elasticsearch"
+
+  # dedicated_master_enabled = "true"
+  # dedicated_master_count = 3
+  # dedicated_master_type = "m4.large.elasticsearch"
 
   ebs_volume_size = 10
 
@@ -36,7 +38,7 @@ module "elasticsearch" {
 
   domain_policy_enabled = "true"
   allow_ip_address = [
-    "1.214.48.241/32",
+    "58.151.93.9/32", // 강남
   ]
 
   advanced_options {
