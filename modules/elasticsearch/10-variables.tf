@@ -20,12 +20,12 @@ variable "suffix" {
 
 variable "vpc_id" {
   description = "The VPC ID."
-  default = ""
+  default     = ""
 }
 
 variable "vpc_cidr" {
   description = "The CIDR block for the VPC, e.g: 10.0.0.0/16"
-  default = "10.0.0.0/16"
+  default     = "10.0.0.0/16"
 }
 
 variable "subnets" {
@@ -34,7 +34,7 @@ variable "subnets" {
 
 variable "base_domain" {
   description = "Base domain of the elasticsearch, e.g: opsnow.com"
-  default = ""
+  default     = ""
 }
 
 variable "advanced_options" {

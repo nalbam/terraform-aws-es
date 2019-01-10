@@ -6,10 +6,11 @@ data "aws_route53_zone" "default" {
 resource "aws_route53_record" "default" {
   count   = "${var.base_domain != "" ? 1 : 0}"
   zone_id = "${data.aws_route53_zone.default.zone_id}"
-  name    = "${local.global_name}.${data.aws_route53_zone.default.name}"
+  name    = "${local.lower_name}.${data.aws_route53_zone.default.name}"
   type    = "CNAME"
   ttl     = 300
+
   records = [
-    "${aws_elasticsearch_domain.default.*.endpoint}"
+    "${aws_elasticsearch_domain.default.*.endpoint}",
   ]
 }

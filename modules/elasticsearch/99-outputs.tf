@@ -1,7 +1,7 @@
 // Output some useful variables for quick SSH access etc.
 
 output "name" {
-  value = "${lower(var.city)}-${lower(var.stage)}-${lower(var.name)}"
+  value = "${local.full_name}"
 }
 
 output "endpoint" {
