@@ -1,1 +1,1 @@
-# terraform-aws-elasticsearch
+# terraform-aws-es

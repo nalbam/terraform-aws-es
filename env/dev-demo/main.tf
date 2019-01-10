@@ -19,7 +19,7 @@ module "elasticsearch" {
   city   = "SEOUL"
   stage  = "DEV"
   name   = "DEMO"
-  suffix = "ELASTICSEARCH"
+  suffix = "ES"
 
   base_domain = "nalbam.com"
 
