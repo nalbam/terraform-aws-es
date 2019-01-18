@@ -161,6 +161,12 @@ variable "automated_snapshot_start_hour" {
   default     = 0
 }
 
+variable "snapshot_bucket_enabled" {
+  description = "Whether to create a bucket for custom Elasticsearch backups (other than the default daily one)"
+  type        = "string"
+  default     = "false"
+}
+
 variable "dedicated_master_enabled" {
   description = "Indicates whether dedicated master nodes are enabled for the cluster"
   type        = "string"

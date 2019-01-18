@@ -1,11 +1,13 @@
 # locals
 
 locals {
-  full_name = "${var.city}-${var.stage}-${var.name}-${var.suffix}"
+  name = "${lower(var.stage)}-${lower(var.name)}"
 
-  upper_name = "${upper(local.full_name)}"
+  simple_name = "${lower(var.city)}-${local.name}"
 
-  lower_name = "${lower(local.full_name)}"
+  global_name = "${local.name}-${lower(var.suffix)}"
+
+  full_name = "${local.simple_name}-${lower(var.suffix)}"
 
   az_count = "${length(data.aws_availability_zones.azs.names) > 3 ? 3 : length(data.aws_availability_zones.azs.names)}"
 }

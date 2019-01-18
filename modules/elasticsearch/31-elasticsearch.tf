@@ -1,5 +1,5 @@
 resource "aws_elasticsearch_domain" "default" {
-  domain_name = "${local.lower_name}"
+  domain_name = "${local.name}"
 
   elasticsearch_version = "${var.elasticsearch_version}"
 
@@ -57,7 +57,7 @@ resource "aws_elasticsearch_domain" "default" {
     cloudwatch_log_group_arn = "${var.log_publishing_application_cloudwatch_log_group_arn}"
   }
   tags = {
-    Name = "${local.lower_name}"
+    Name = "${local.full_name}"
   }
 
   # depends_on = ["aws_iam_service_linked_role.default"]
