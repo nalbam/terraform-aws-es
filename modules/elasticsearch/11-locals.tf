@@ -1,15 +1,13 @@
 # locals
 
 locals {
-  name = "${lower(var.stage)}-${lower(var.name)}"
+  full_name = "${var.city}-${var.stage}-${var.name}-${var.suffix}"
 
-  simple_name = "${lower(var.city)}-${local.name}"
+  upper_name = "${upper(local.full_name)}"
 
-  global_name = "${local.name}-${lower(var.suffix)}"
+  lower_name = "${lower(local.full_name)}"
 
-  full_name = "${local.simple_name}-${lower(var.suffix)}"
+  # sub_domain = "${lower(var.stage)}-${lower(var.name)}-${lower(var.suffix)}"
 
-  az_count = "${length(data.aws_availability_zones.azs.names) > 3 ? 3 : length(data.aws_availability_zones.azs.names)}"
+  # az_count = "${length(data.aws_availability_zones.azs.names) > 3 ? 3 : length(data.aws_availability_zones.azs.names)}"
 }
-
-data "aws_availability_zones" "azs" {}
