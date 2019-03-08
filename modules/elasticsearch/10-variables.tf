@@ -183,3 +183,9 @@ variable "dedicated_master_type" {
   type        = "string"
   default     = "m4.large.elasticsearch"
 }
+
+variable "local_exec_interpreter" {
+  description = "Command to run for local-exec resources. Must be a shell-style interpreter."
+  type        = "list"
+  default     = ["/bin/sh", "-c"]
+}

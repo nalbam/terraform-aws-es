@@ -1,15 +1,15 @@
 // Output some useful variables for quick SSH access etc.
 
 output "name" {
-  value = "${aws_elasticsearch_domain.default.domain_name}"
+  value = "${element(concat(aws_elasticsearch_domain.this.*.domain_name, list("")), 0)}"
 }
 
 output "endpoint" {
-  value = "${aws_elasticsearch_domain.default.endpoint}"
+  value = "${element(concat(aws_elasticsearch_domain.this.*.endpoint, list("")), 0)}"
 }
 
 output "domain" {
-  value = "${element(concat(aws_route53_record.default.*.name, list("")), 0)}"
+  value = "${element(concat(aws_route53_record.this.*.name, list("")), 0)}"
 }
 
 output "snapshot_bucket" {

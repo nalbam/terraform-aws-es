@@ -5,8 +5,8 @@ data "aws_iam_policy_document" "domain_policy" {
     actions = ["${var.iam_actions}"] // ["es:*"]
 
     resources = [
-      "${join("", aws_elasticsearch_domain.default.*.arn)}",
-      "${join("", aws_elasticsearch_domain.default.*.arn)}/*",
+      "${join("", aws_elasticsearch_domain.this.*.arn)}",
+      "${join("", aws_elasticsearch_domain.this.*.arn)}/*",
     ]
 
     principals {
@@ -25,7 +25,7 @@ data "aws_iam_policy_document" "domain_policy" {
 resource "aws_elasticsearch_domain_policy" "domain_policy" {
   count = "${var.domain_policy_enabled == "true" ? 1 : 0}"
 
-  domain_name = "${aws_elasticsearch_domain.default.domain_name}"
+  domain_name = "${aws_elasticsearch_domain.this.domain_name}"
 
   access_policies = "${join("", data.aws_iam_policy_document.domain_policy.*.json)}"
 }
