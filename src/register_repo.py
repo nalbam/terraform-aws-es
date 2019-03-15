@@ -18,21 +18,20 @@ awsauth = AWS4Auth(credentials.access_key, credentials.secret_key,
 
 # Register repository
 
-path = '_snapshot/' + bucket  # the Elasticsearch API endpoint
-url = host + path
+url = host + '_snapshot/' + bucket  # the Elasticsearch API endpoint
 
 role_arn = 'arn:aws:iam::' + userid + ':role/' + bucket
 
 payload = {
-    "type": "s3",
-    "settings": {
-        "bucket": bucket,
-        "region": region,
-        "role_arn": role_arn
+    'type': 's3',
+    'settings': {
+        'bucket': bucket,
+        'region': region,
+        'role_arn': role_arn
     }
 }
 
-headers = {"Content-Type": "application/json"}
+headers = {'Content-Type': 'application/json'}
 
 print('Register repository : ' + bucket)
 

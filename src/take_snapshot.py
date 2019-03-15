@@ -17,18 +17,17 @@ credentials = boto3.Session().get_credentials()
 awsauth = AWS4Auth(credentials.access_key, credentials.secret_key,
                    region, service, session_token=credentials.token)
 
-# Delete index
+# Take snapshot
 
-yesterday = date.today() - timedelta(40)
-date_time = yesterday.strftime("%Y.%m.%d")
+yesterday = date.today() - timedelta(1)
+date_time = yesterday.strftime('%Y.%m.%d')
 
-indices = 'logstash-' + date_time
+snapshot = 'logstash-' + date_time
 
-path = indices
-url = host + path
+url = host + '_snapshot/' + bucket + '/' + snapshot
 
-print('Delete index : ' + indices)
+print('Take snapshot : ' + snapshot)
 
-r = requests.delete(url, auth=awsauth)
+r = requests.put(url, auth=awsauth)
 
 print(r.text)
