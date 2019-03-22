@@ -14,33 +14,3 @@ data "template_file" "register_repo" {
     ES_HOST    = "https://${aws_elasticsearch_domain.this.endpoint}/"
   }
 }
-
-data "template_file" "take_snapshot" {
-  template = "${file("${path.module}/template/take_snapshot.py")}"
-
-  vars {
-    AWS_BUCKET = "${local.lower_name}-snapshot"
-    AWS_REGION = "${var.region}"
-    ES_HOST    = "https://${aws_elasticsearch_domain.this.endpoint}/"
-  }
-}
-
-data "template_file" "restore_snapshot_all" {
-  template = "${file("${path.module}/template/restore_snapshot_all.py")}"
-
-  vars {
-    AWS_BUCKET = "${local.lower_name}-snapshot"
-    AWS_REGION = "${var.region}"
-    ES_HOST    = "https://${aws_elasticsearch_domain.this.endpoint}/"
-  }
-}
-
-data "template_file" "restore_snapshot_one" {
-  template = "${file("${path.module}/template/restore_snapshot_one.py")}"
-
-  vars {
-    AWS_BUCKET = "${local.lower_name}-snapshot"
-    AWS_REGION = "${var.region}"
-    ES_HOST    = "https://${aws_elasticsearch_domain.this.endpoint}/"
-  }
-}
