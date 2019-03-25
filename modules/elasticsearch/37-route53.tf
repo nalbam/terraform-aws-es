@@ -11,6 +11,6 @@ resource "aws_route53_record" "this" {
   ttl     = 300
 
   records = [
-    "${aws_elasticsearch_domain.this.*.endpoint}",
+    "${aws_elasticsearch_domain.default.*.endpoint}",
   ]
 }
