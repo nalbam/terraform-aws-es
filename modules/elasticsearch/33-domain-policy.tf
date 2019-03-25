@@ -1,4 +1,4 @@
-data "aws_iam_policy_document" "domain_policy" {
+data "aws_iam_policy_document" "default" {
   count = "${var.domain_policy_enabled == "true" ? 1 : 0}"
 
   statement {
