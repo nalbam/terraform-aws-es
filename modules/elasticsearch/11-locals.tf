@@ -1,7 +1,7 @@
 # locals
 
 locals {
-  full_name = "${var.city}-${var.stage}-${var.name}-${var.suffix}"
+  full_name = "${var.stage}-${var.name}"
 
   upper_name = "${upper(local.full_name)}"
 
