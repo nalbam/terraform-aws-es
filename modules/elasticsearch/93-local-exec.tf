@@ -1,7 +1,7 @@
 # aws auth
 
 resource "null_resource" "register_repo" {
-  depends_on = ["aws_elasticsearch_domain.this"]
+  depends_on = ["aws_elasticsearch_domain.default"]
 
   provisioner "local-exec" {
     working_dir = "${path.module}"
@@ -20,6 +20,6 @@ EOS
 
   triggers {
     register_repo = "${data.template_file.register_repo.rendered}"
-    endpoint      = "${aws_elasticsearch_domain.this.endpoint}"
+    endpoint      = "${aws_elasticsearch_domain.default.endpoint}"
   }
 }
