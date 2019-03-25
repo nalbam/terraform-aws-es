@@ -27,5 +27,5 @@ resource "aws_elasticsearch_domain_policy" "domain_policy" {
 
   domain_name = "${aws_elasticsearch_domain.default.domain_name}"
 
-  access_policies = "${join("", data.aws_iam_policy_document.domain_policy.*.json)}"
+  access_policies = "${join("", data.aws_iam_policy_document.default.*.json)}"
 }
