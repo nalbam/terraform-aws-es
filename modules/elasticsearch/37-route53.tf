@@ -1,12 +1,12 @@
-data "aws_route53_zone" "this" {
+data "aws_route53_zone" "default" {
   count = "${var.base_domain != "" ? 1 : 0}"
   name  = "${var.base_domain}"
 }
 
-resource "aws_route53_record" "this" {
+resource "aws_route53_record" "default" {
   count   = "${var.base_domain != "" ? 1 : 0}"
-  zone_id = "${data.aws_route53_zone.this.zone_id}"
-  name    = "${local.lower_name}.${data.aws_route53_zone.this.name}"
+  zone_id = "${data.aws_route53_zone.default.zone_id}"
+  name    = "${local.lower_name}.${data.aws_route53_zone.default.name}"
   type    = "CNAME"
   ttl     = 300
 
