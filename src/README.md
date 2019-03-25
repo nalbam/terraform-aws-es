@@ -5,10 +5,7 @@
 ## prepare
 
 ```bash
-sudo pip3 install --upgrade boto3
-sudo pip3 install --upgrade requests
-sudo pip3 install --upgrade requests_aws4auth
-sudo pip3 install --upgrade slacker
+sudo pip install --upgrade boto3 requests slacker requests_aws4auth
 ```
 
 ## variables
