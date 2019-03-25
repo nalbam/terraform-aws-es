@@ -1,4 +1,4 @@
-resource "aws_elasticsearch_domain" "this" {
+resource "aws_elasticsearch_domain" "default" {
   domain_name = "${local.lower_name}"
 
   elasticsearch_version = "${var.elasticsearch_version}"
