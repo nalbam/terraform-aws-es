@@ -34,7 +34,7 @@ awsauth = AWS4Auth(credentials.access_key, credentials.secret_key,
 client = boto3.client("sts")
 userid = client.get_caller_identity()["Account"]
 
-userid = input_env("AWS_USERID",userid)
+userid = input_env("AWS_USERID", userid)
 bucket = input_env("AWS_BUCKET", "")
 
 host = input_env("ES_HOST", "")
