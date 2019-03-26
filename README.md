@@ -34,10 +34,12 @@ export ES_HOST="http://elasticsearch.dev.opsnow.com/"
 
 ```bash
 # Register repository
-python3 src/register_repo.py
+python3 snapshot/register_repo.py
 
 # Take snapshot
-python3 src/take_snapshot.py
+python3 snapshot/take_snapshot.py
+
+
 ```
 
 * <https://docs.aws.amazon.com/ko_kr/elasticsearch-service/latest/developerguide/es-managedomains-snapshots.html>
