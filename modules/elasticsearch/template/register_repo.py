@@ -1,23 +1,20 @@
-import os
 import boto3
 import requests
 
 from requests_aws4auth import AWS4Auth
 
-userid = '${AWS_USERID}'  # os.environ.get('AWS_USERID')
-bucket = '${AWS_BUCKET}'  # os.environ.get('AWS_BUCKET')
-region = '${AWS_REGION}'  # os.environ.get('AWS_REGION', 'ap-northeast-2')
+region = '${AWS_REGION}'
 
-service = 'es'
-host = '${ES_HOST}'  # os.environ.get('ES_HOST')
+userid = '${AWS_USERID}'
+bucket = '${AWS_BUCKET}'
+
+host = '${ES_HOST}'
 
 credentials = boto3.Session().get_credentials()
 awsauth = AWS4Auth(credentials.access_key, credentials.secret_key,
-                   region, service, session_token=credentials.token)
+                   region, 'es', session_token=credentials.token)
 
-# Register repository
-
-url = host + '_snapshot/' + bucket  # the Elasticsearch API endpoint
+url = host + '_snapshot/' + bucket
 
 role_arn = 'arn:aws:iam::' + userid + ':role/' + bucket
 
