@@ -44,6 +44,12 @@ module "elasticsearch" {
   advanced_options {
     "rest.action.multi.allow_explicit_index" = "true"
   }
+
+  tags = "${
+    map(
+      "KubernetesCluster", "seoul-dev-demo-eks",
+    )
+  }"
 }
 
 output "name" {
