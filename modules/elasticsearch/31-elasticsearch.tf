@@ -48,9 +48,7 @@ resource "aws_elasticsearch_domain" "this" {
     cloudwatch_log_group_arn = "${var.log_publishing_application_cloudwatch_log_group_arn}"
   }
 
-  tags = {
-    Name = "${local.lower_name}"
-  }
+  tags = "${merge(map("Name", "${local.lower_name}"), var.tags)}"
 
   # depends_on = ["aws_iam_service_linked_role.this"]
 }

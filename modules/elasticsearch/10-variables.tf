@@ -189,3 +189,8 @@ variable "local_exec_interpreter" {
   type        = "list"
   default     = ["/bin/sh", "-c"]
 }
+
+variable "tags" {
+  description = "A map of tags to add to all resources"
+  default     = {}
+}
