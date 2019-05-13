@@ -1,11 +1,11 @@
 // Output some useful variables for quick SSH access etc.
 
 output "name" {
-  value = "${element(concat(aws_elasticsearch_domain.this.*.domain_name, list("")), 0)}"
+  value = "${aws_elasticsearch_domain.this.domain_name}"
 }
 
 output "endpoint" {
-  value = "${element(concat(aws_elasticsearch_domain.this.*.endpoint, list("")), 0)}"
+  value = "${aws_elasticsearch_domain.this.endpoint}"
 }
 
 output "domain" {
