@@ -1,10 +1,10 @@
 # aws auth
 
 resource "null_resource" "register_repo" {
-  depends_on = ["aws_elasticsearch_domain.this"]
+  depends_on = [aws_elasticsearch_domain.this]
 
   provisioner "local-exec" {
-    working_dir = "${path.module}"
+    working_dir = path.module
 
     command = <<EOS
 for i in `seq 1 5`; do \
@@ -15,11 +15,13 @@ done; \
 rm register_repo.py;
 EOS
 
-    interpreter = ["${var.local_exec_interpreter}"]
+
+    interpreter = var.local_exec_interpreter
   }
 
-  triggers {
-    register_repo = "${data.template_file.register_repo.rendered}"
-    endpoint      = "${aws_elasticsearch_domain.this.endpoint}"
+  triggers = {
+    register_repo = data.template_file.register_repo.rendered
+    endpoint = aws_elasticsearch_domain.this.endpoint
   }
 }
+
