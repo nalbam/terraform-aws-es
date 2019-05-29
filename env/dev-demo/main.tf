@@ -6,6 +6,7 @@ terraform {
     bucket = "terraform-nalbam-seoul"
     key    = "elasticsearch.tfstate"
   }
+  required_version = ">= 0.12"
 }
 
 provider "aws" {
@@ -41,33 +42,31 @@ module "elasticsearch" {
     "58.151.93.9/32", // 강남
   ]
 
-  advanced_options {
+  advanced_options = {
     "rest.action.multi.allow_explicit_index" = "true"
   }
 
-  tags = "${
-    map(
-      "KubernetesCluster", "seoul-dev-demo-eks",
-    )
-  }"
+  tags = {
+    "KubernetesCluster" = "seoul-dev-demo-eks"
+  }
 }
 
 output "name" {
-  value = "${module.elasticsearch.name}"
+  value = module.elasticsearch.name
 }
 
 output "endpoint" {
-  value = "${module.elasticsearch.endpoint}"
+  value = module.elasticsearch.endpoint
 }
 
 output "domain" {
-  value = "${module.elasticsearch.domain}"
+  value = module.elasticsearch.domain
 }
 
 output "snapshot_bucket" {
-  value = "${module.elasticsearch.snapshot_bucket}"
+  value = module.elasticsearch.snapshot_bucket
 }
 
 output "snapshot_role_arn" {
-  value = "${module.elasticsearch.snapshot_role_arn}"
+  value = module.elasticsearch.snapshot_role_arn
 }
