@@ -15,7 +15,7 @@ data "aws_iam_policy_document" "snapshot_role" {
 
 resource "aws_iam_role" "snapshot_role" {
   count              = var.snapshot_bucket_enabled == "true" ? 1 : 0
-  name               = "${local.lower_name}-snapshot"
+  name               = "${local.full_name}-snapshot"
   description        = "Role used for the Elasticsearch domain"
   assume_role_policy = data.aws_iam_policy_document.snapshot_role[0].json
 }
@@ -41,7 +41,7 @@ data "aws_iam_policy_document" "snapshot_policy" {
 
 resource "aws_iam_policy" "snapshot_policy" {
   count       = var.snapshot_bucket_enabled == "true" ? 1 : 0
-  name        = "${local.lower_name}-snapshot"
+  name        = "${local.full_name}-snapshot"
   description = "Policy allowing the Elasticsearch domain access to the snapshots S3 bucket"
   policy      = data.aws_iam_policy_document.snapshot_policy[0].json
 }
@@ -51,4 +51,3 @@ resource "aws_iam_role_policy_attachment" "snapshot_policy_attachment" {
   role       = aws_iam_role.snapshot_role[0].id
   policy_arn = aws_iam_policy.snapshot_policy[0].arn
 }
-

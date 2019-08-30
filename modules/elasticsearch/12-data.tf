@@ -11,9 +11,8 @@ data "template_file" "register_repo" {
 
   vars = {
     AWS_USERID = data.aws_caller_identity.current.account_id
-    AWS_BUCKET = "${local.lower_name}-snapshot"
+    AWS_BUCKET = "${local.full_name}-snapshot"
     AWS_REGION = var.region
     ES_HOST    = "https://${aws_elasticsearch_domain.this.endpoint}/"
   }
 }
-

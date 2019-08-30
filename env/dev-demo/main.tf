@@ -17,10 +17,10 @@ module "elasticsearch" {
   source = "../../modules/elasticsearch"
 
   region = "ap-northeast-2"
-  city   = "SEOUL"
-  stage  = "DEV"
-  name   = "DEMO"
-  suffix = "ES"
+  city   = "seoul"
+  stage  = "dev"
+  name   = "demo"
+  suffix = "es"
 
   base_domain = "nalbam.com"
 

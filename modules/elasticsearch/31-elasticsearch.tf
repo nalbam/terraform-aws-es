@@ -1,5 +1,5 @@
 resource "aws_elasticsearch_domain" "this" {
-  domain_name = local.lower_name
+  domain_name = local.full_name
 
   elasticsearch_version = var.elasticsearch_version
 
@@ -50,10 +50,9 @@ resource "aws_elasticsearch_domain" "this" {
 
   tags = merge(
     {
-      "Name" = local.lower_name
+      "Name" = local.full_name
     },
     var.tags,
   )
   # depends_on = ["aws_iam_service_linked_role.this"]
 }
-

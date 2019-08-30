@@ -1,10 +1,10 @@
 resource "aws_s3_bucket" "snapshot" {
   count  = var.snapshot_bucket_enabled == "true" ? 1 : 0
-  bucket = "${local.lower_name}-snapshot"
+  bucket = "${local.full_name}-snapshot"
   acl    = "private"
 
   tags = {
-    Name = local.lower_name
+    Name = local.full_name
   }
   # server_side_encryption_configuration {
   #   rule {
@@ -14,4 +14,3 @@ resource "aws_s3_bucket" "snapshot" {
   #   }
   # }
 }
-
