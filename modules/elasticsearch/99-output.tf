@@ -19,4 +19,3 @@ output "snapshot_bucket" {
 output "snapshot_role_arn" {
   value = element(concat(aws_iam_role.snapshot_role.*.arn, [""]), 0)
 }
-

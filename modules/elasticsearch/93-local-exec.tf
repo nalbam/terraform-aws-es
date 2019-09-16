@@ -21,7 +21,6 @@ EOS
 
   triggers = {
     register_repo = data.template_file.register_repo.rendered
-    endpoint = aws_elasticsearch_domain.this.endpoint
+    endpoint      = aws_elasticsearch_domain.this.endpoint
   }
 }
-

@@ -17,10 +17,7 @@ module "elasticsearch" {
   source = "../../modules/elasticsearch"
 
   region = "ap-northeast-2"
-  city   = "seoul"
-  stage  = "dev"
-  name   = "demo"
-  suffix = "es"
+  name   = "seoul-dev-demo-es"
 
   base_domain = "nalbam.com"
 

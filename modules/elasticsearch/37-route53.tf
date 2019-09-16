@@ -6,7 +6,7 @@ data "aws_route53_zone" "this" {
 resource "aws_route53_record" "this" {
   count   = var.base_domain != "" ? 1 : 0
   zone_id = data.aws_route53_zone.this[0].zone_id
-  name    = "${local.full_name}.${data.aws_route53_zone.this[0].name}"
+  name    = "${var.name}.${data.aws_route53_zone.this[0].name}"
   type    = "CNAME"
   ttl     = 300
 

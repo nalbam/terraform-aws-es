@@ -1,5 +1,5 @@
 resource "aws_elasticsearch_domain" "this" {
-  domain_name = local.full_name
+  domain_name = var.name
 
   elasticsearch_version = var.elasticsearch_version
 
@@ -50,7 +50,7 @@ resource "aws_elasticsearch_domain" "this" {
 
   tags = merge(
     {
-      "Name" = local.full_name
+      "Name" = var.name
     },
     var.tags,
   )
