@@ -15,7 +15,6 @@ done; \
 rm register_repo.py;
 EOS
 
-
     interpreter = var.local_exec_interpreter
   }
 
