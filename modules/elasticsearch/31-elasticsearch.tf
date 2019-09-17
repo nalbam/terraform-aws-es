@@ -50,7 +50,7 @@ resource "aws_elasticsearch_domain" "this" {
 
   tags = merge(
     {
-      "Name" = var.name
+      Name = var.name
     },
     var.tags,
   )
