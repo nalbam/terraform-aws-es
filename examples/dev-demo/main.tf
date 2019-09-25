@@ -1,4 +1,4 @@
-# bastion
+# elasticsearch
 
 terraform {
   backend "s3" {
@@ -14,7 +14,7 @@ provider "aws" {
 }
 
 module "elasticsearch" {
-  source = "../../modules/elasticsearch"
+  source = "../../"
 
   region = "ap-northeast-2"
   name   = "seoul-dev-demo-es"

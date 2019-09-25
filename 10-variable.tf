@@ -23,7 +23,7 @@ variable "subnets" {
 }
 
 variable "base_domain" {
-  description = "Base domain of the elasticsearch, e.g: opsnow.com"
+  description = "Base domain of the elasticsearch, e.g: nalbam.com"
   default     = ""
 }
 

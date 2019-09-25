@@ -1,4 +1,4 @@
-# terraform-aws-elasticsearch
+# terraform-aws-es
 
 ## Create elasticsearch
 
@@ -27,7 +27,7 @@ terraform apply
 ```bash
 export AWS_BUCKET="elasticsearch-snapshot"
 
-export ES_HOST="http://elasticsearch.dev.opsnow.com/"
+export ES_HOST="http://elasticsearch.dev.nalbam.com/"
 ```
 
 ### snapshot
