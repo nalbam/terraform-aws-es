@@ -10,60 +10,35 @@ terraform {
 }
 
 provider "aws" {
-  region = "ap-northeast-2"
+  region = var.region
 }
 
 module "elasticsearch" {
   source = "../../"
 
-  region = "ap-northeast-2"
-  name   = "seoul-dev-demo-es"
+  region = var.region
+  name   = var.name
 
-  base_domain = "nalbam.com"
+  base_domain = var.base_domain
 
-  instance_count = 1
-  instance_type  = "t2.small.elasticsearch"
+  instance_count = var.instance_count
+  instance_type  = var.instance_type
 
-  dedicated_master_enabled = "true"
-  dedicated_master_count   = 3
-  dedicated_master_type    = "m4.large.elasticsearch"
+  advanced_options = var.advanced_options
 
-  ebs_volume_size = 64
+  dedicated_master_enabled = var.dedicated_master_enabled
+  dedicated_master_count   = var.dedicated_master_count
+  dedicated_master_type    = var.dedicated_master_type
 
-  zone_awareness_enabled  = "false"
-  encrypt_at_rest_enabled = "false"
-  domain_policy_enabled   = "true"
-  snapshot_bucket_enabled = "true"
+  ebs_volume_type = var.ebs_volume_type
+  ebs_volume_size = var.ebs_volume_size
 
-  allow_ip_address = [
-    "58.151.93.9/32", // 강남
-  ]
+  zone_awareness_enabled  = var.zone_awareness_enabled
+  encrypt_at_rest_enabled = var.encrypt_at_rest_enabled
+  domain_policy_enabled   = var.domain_policy_enabled
+  snapshot_bucket_enabled = var.snapshot_bucket_enabled
 
-  advanced_options = {
-    "rest.action.multi.allow_explicit_index" = "true"
-  }
+  allow_ip_address = var.allow_ip_address
 
-  tags = {
-    "KubernetesCluster" = "seoul-dev-demo-eks"
-  }
-}
-
-output "name" {
-  value = module.elasticsearch.name
-}
-
-output "endpoint" {
-  value = module.elasticsearch.endpoint
-}
-
-output "domain" {
-  value = module.elasticsearch.domain
-}
-
-output "snapshot_bucket" {
-  value = module.elasticsearch.snapshot_bucket
-}
-
-output "snapshot_role_arn" {
-  value = module.elasticsearch.snapshot_role_arn
+  tags = var.tags
 }

@@ -8,29 +8,9 @@ variable "name" {
   description = "Name of the cluster, e.g: seoul-dev-demo-es"
 }
 
-variable "vpc_id" {
-  description = "The VPC ID."
-  default     = ""
-}
-
-variable "vpc_cidr" {
-  description = "The CIDR block for the VPC, e.g: 10.0.0.0/16"
-  default     = "10.0.0.0/16"
-}
-
-variable "subnets" {
-  default = "85"
-}
-
 variable "base_domain" {
   description = "Base domain of the elasticsearch, e.g: nalbam.com"
   default     = ""
-}
-
-variable "advanced_options" {
-  description = "Key-value string pairs to specify advanced configuration options"
-  type        = map(string)
-  default     = {}
 }
 
 variable "elasticsearch_version" {
@@ -50,6 +30,65 @@ variable "instance_type" {
   default     = "m4.large.elasticsearch"
 }
 
+variable "advanced_options" {
+  description = "Key-value string pairs to specify advanced configuration options"
+  type        = map(string)
+  default     = {}
+}
+
+variable "dedicated_master_enabled" {
+  description = "Indicates whether dedicated master nodes are enabled for the cluster"
+  type        = string
+  default     = "false"
+}
+
+variable "dedicated_master_count" {
+  description = "Number of dedicated master nodes in the cluster"
+  default     = 0
+}
+
+variable "dedicated_master_type" {
+  description = "Instance type of the dedicated master nodes in the cluster"
+  type        = string
+  default     = "m4.large.elasticsearch"
+}
+
+variable "ebs_volume_type" {
+  description = "Storage type of EBS volumes"
+  type        = string
+  default     = "gp2"
+}
+
+variable "ebs_volume_size" {
+  description = "Optionally use EBS volumes for data storage by specifying volume size in GB"
+  default     = 0
+}
+
+variable "ebs_iops" {
+  description = "The baseline input/output (I/O) performance of EBS volumes attached to data nodes. Applicable only for the Provisioned IOPS EBS volume type"
+  default     = 0
+}
+
+variable "zone_awareness_enabled" {
+  // You must select an even number of data nodes if zone awareness is enabled.
+  description = "Enable zone awareness for Elasticsearch cluster"
+  type        = string
+  default     = "false"
+}
+
+variable "encrypt_at_rest_enabled" {
+  // Encryption at rest is not supported with t2.small.elasticsearch instances
+  description = "Whether to enable encryption at rest"
+  type        = string
+  default     = "false"
+}
+
+variable "encrypt_at_rest_kms_key_id" {
+  description = "The KMS key id to encrypt the Elasticsearch domain with. If not specified, then it defaults to using the AWS/Elasticsearch service KMS key"
+  type        = string
+  default     = ""
+}
+
 variable "domain_policy_enabled" {
   description = "Enable domain policy for Elasticsearch cluster"
   type        = string
@@ -66,48 +105,6 @@ variable "iam_role_arns" {
   description = "List of IAM role ARNs to permit access to the Elasticsearch domain"
   type        = list(string)
   default     = ["*"]
-}
-
-variable "allow_ip_address" {
-  description = "List of IP Address to permit access to the Elasticsearch domain"
-  type        = list(string)
-  default     = ["*"]
-}
-
-variable "zone_awareness_enabled" {
-  // You must select an even number of data nodes if zone awareness is enabled.
-  description = "Enable zone awareness for Elasticsearch cluster"
-  type        = string
-  default     = "false"
-}
-
-variable "ebs_volume_size" {
-  description = "Optionally use EBS volumes for data storage by specifying volume size in GB"
-  default     = 0
-}
-
-variable "ebs_volume_type" {
-  description = "Storage type of EBS volumes"
-  type        = string
-  default     = "gp2"
-}
-
-variable "ebs_iops" {
-  description = "The baseline input/output (I/O) performance of EBS volumes attached to data nodes. Applicable only for the Provisioned IOPS EBS volume type"
-  default     = 0
-}
-
-variable "encrypt_at_rest_enabled" {
-  // Encryption at rest is not supported with t2.small.elasticsearch instances
-  description = "Whether to enable encryption at rest"
-  type        = string
-  default     = "false"
-}
-
-variable "encrypt_at_rest_kms_key_id" {
-  description = "The KMS key id to encrypt the Elasticsearch domain with. If not specified, then it defaults to using the AWS/Elasticsearch service KMS key"
-  type        = string
-  default     = ""
 }
 
 variable "log_publishing_index_enabled" {
@@ -157,27 +154,16 @@ variable "snapshot_bucket_enabled" {
   default     = "false"
 }
 
-variable "dedicated_master_enabled" {
-  description = "Indicates whether dedicated master nodes are enabled for the cluster"
-  type        = string
-  default     = "false"
-}
-
-variable "dedicated_master_count" {
-  description = "Number of dedicated master nodes in the cluster"
-  default     = 0
-}
-
-variable "dedicated_master_type" {
-  description = "Instance type of the dedicated master nodes in the cluster"
-  type        = string
-  default     = "m4.large.elasticsearch"
-}
-
 variable "local_exec_interpreter" {
   description = "Command to run for local-exec resources. Must be a shell-style interpreter."
   type        = list(string)
   default     = ["/bin/sh", "-c"]
+}
+
+variable "allow_ip_address" {
+  description = "List of IP Address to permit access to the Elasticsearch domain"
+  type        = list(string)
+  default     = ["*"]
 }
 
 variable "tags" {
