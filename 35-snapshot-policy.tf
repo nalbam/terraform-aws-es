@@ -1,3 +1,5 @@
+# snapshot policy
+
 data "aws_iam_policy_document" "snapshot_role" {
   count = var.snapshot_bucket_enabled == "true" ? 1 : 0
 

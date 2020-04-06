@@ -16,7 +16,7 @@ variable "base_domain" {
 variable "elasticsearch_version" {
   description = "Version of Elasticsearch to deploy"
   type        = string
-  default     = "6.3"
+  default     = "7.4"
 }
 
 variable "instance_count" {
@@ -27,7 +27,7 @@ variable "instance_count" {
 variable "instance_type" {
   description = "Elasticsearch instance type for data nodes in the cluster"
   type        = string
-  default     = "m4.large.elasticsearch"
+  default     = "r5.large.elasticsearch"
 }
 
 variable "advanced_options" {
@@ -50,7 +50,7 @@ variable "dedicated_master_count" {
 variable "dedicated_master_type" {
   description = "Instance type of the dedicated master nodes in the cluster"
   type        = string
-  default     = "m4.large.elasticsearch"
+  default     = "r5.large.elasticsearch"
 }
 
 variable "ebs_volume_type" {

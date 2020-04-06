@@ -1,4 +1,4 @@
-// Output some useful variables for quick SSH access etc.
+# output
 
 output "name" {
   value = aws_elasticsearch_domain.this.domain_name

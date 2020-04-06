@@ -1,3 +1,5 @@
+# elasticsearch
+
 resource "aws_elasticsearch_domain" "this" {
   domain_name = var.name
 
@@ -13,6 +15,11 @@ resource "aws_elasticsearch_domain" "this" {
     dedicated_master_type    = var.dedicated_master_type
     zone_awareness_enabled   = var.zone_awareness_enabled
   }
+
+  # vpc_options {
+  #   subnet_ids         = var.subnet_ids
+  #   security_group_ids = var.security_group_ids
+  # }
 
   ebs_options {
     ebs_enabled = var.ebs_volume_size > 0 ? true : false

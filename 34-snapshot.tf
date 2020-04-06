@@ -1,3 +1,5 @@
+# snapshot
+
 resource "aws_s3_bucket" "snapshot" {
   count  = var.snapshot_bucket_enabled == "true" ? 1 : 0
   bucket = "${var.name}-snapshot"

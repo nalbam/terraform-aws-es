@@ -1,3 +1,5 @@
+# domain policy
+
 data "aws_iam_policy_document" "domain_policy" {
   count = var.domain_policy_enabled == "true" ? 1 : 0
 
@@ -29,4 +31,3 @@ resource "aws_elasticsearch_domain_policy" "domain_policy" {
 
   access_policies = join("", data.aws_iam_policy_document.domain_policy.*.json)
 }
-

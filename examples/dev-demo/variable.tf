@@ -5,7 +5,7 @@ variable "region" {
 }
 
 variable "name" {
-  default = "seoul-dev-demo-es"
+  default = "es-demo"
 }
 
 variable "base_domain" {
@@ -13,7 +13,7 @@ variable "base_domain" {
 }
 
 variable "elasticsearch_version" {
-  default = "6.3"
+  default = "7.4"
 }
 
 variable "instance_count" {
@@ -39,7 +39,7 @@ variable "dedicated_master_count" {
 }
 
 variable "dedicated_master_type" {
-  default = "m4.large.elasticsearch"
+  default = "r5.large.elasticsearch"
 }
 
 variable "ebs_volume_type" {
@@ -63,7 +63,7 @@ variable "domain_policy_enabled" {
 }
 
 variable "snapshot_bucket_enabled" {
-  default = "true"
+  default = "false"
 }
 
 variable "allow_ip_address" {
