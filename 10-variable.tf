@@ -154,6 +154,30 @@ variable "snapshot_bucket_enabled" {
   default     = "false"
 }
 
+variable "cognito_authentication_enabled" {
+  description = "Whether to enable Amazon Cognito authentication with Kibana"
+  type        = bool
+  default     = false
+}
+
+variable "cognito_user_pool_id" {
+  description = "The ID of the Cognito User Pool to use"
+  type        = string
+  default     = ""
+}
+
+variable "cognito_identity_pool_id" {
+  description = "The ID of the Cognito Identity Pool to use"
+  type        = string
+  default     = ""
+}
+
+variable "cognito_iam_role_arn" {
+  description = "ARN of the IAM role that has the AmazonESCognitoAccess policy attached"
+  type        = string
+  default     = ""
+}
+
 variable "local_exec_interpreter" {
   description = "Command to run for local-exec resources. Must be a shell-style interpreter."
   type        = list(string)
